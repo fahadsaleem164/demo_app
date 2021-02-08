@@ -57,7 +57,7 @@ console.log(process.env.STRAPI_URL)
                     <div  class="col-12 col-lg-4" style={{width:"100%" , height:"100%" ,marginTop:'5%'}}>
                        
                               
-                                <img src={process.env.STRAPI_URL + data.image[0].url} class="fit-image" /> 
+                                <img src={data.image[0].url} class="fit-image" /> 
                              
                         
                     </div>
