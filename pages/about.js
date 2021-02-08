@@ -57,7 +57,7 @@ console.log(process.env.STRAPI_URL)
                     <div  class="col-12 col-lg-4" style={{width:"100%" , height:"100%" ,marginTop:'5%'}}>
                        
                               
-                                <img src={process.env.STRAPI_URL + data.image[0].url.slice(1)} class="fit-image" /> 
+                                <img src={process.env.STRAPI_URL + data.image[0].url} class="fit-image" /> 
                              
                         
                     </div>
@@ -73,7 +73,7 @@ console.log(process.env.STRAPI_URL)
 
 
   export async function getStaticProps(context) {
-    const res = await fetch('http://localhost:1337/about-us')
+    const res = await fetch( process.env.STRAPI_URL + '/about-us')
     
     const data = await res.json()
   
