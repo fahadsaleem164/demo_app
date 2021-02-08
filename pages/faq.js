@@ -1,5 +1,6 @@
 import Header from '../components/header'
-export default function Faq() {
+export default function Faq({data}) {
+ 
     return (
 
             <>
@@ -30,8 +31,56 @@ export default function Faq() {
             </div>
         </section>
 
+        <section class="section-2 offers" style={{background:"#eef4ed"}}>
+            <div class="container">
+                <div class="row text-center intro">
+
+                {data.map((tag,index) => ( 
+                  <>
+                    <div class="col-12" style={{textAlign: "left"}}>
+                         <h2>{tag.title}</h2>
+                        <div class="row item widget-tags">
+                            <div class="col-12 align-self-center">
+                           <div class="col-12">
+                               {tag.description}
+                          
+                            </div>
+                            <br></br>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                     </>
+                    
+                      ))}
+                     
+                   </div>
+        
+                <div class="row justify-content-center items">
+            </div>
+         </div>
+    </section>
+
  
             </>
 
 )
+  }
+
+export async function getStaticProps(context) {
+    const res = await fetch(process.env.STRAPI_URL + '/faqs')
+    const data = await res.json()
+  
+    if (!data) {
+      return {
+        notFound: true,
+      }
+    }
+  
+    return {
+      props: {
+          data
+    }, // will be passed to the page component as props
+    }
   }
