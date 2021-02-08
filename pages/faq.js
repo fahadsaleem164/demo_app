@@ -68,7 +68,7 @@ export default function Faq({data}) {
 )
   }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const res = await fetch(process.env.STRAPI_URL + '/faqs')
     const data = await res.json()
   
