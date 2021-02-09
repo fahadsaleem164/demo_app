@@ -1,6 +1,9 @@
  import  Logo  from "./../public/assets/images/about-1.jpg";
  import {Helmet} from "react-helmet";
  import Link from 'next/link'
+
+
+
 export default function Header() {
     return (
 
@@ -23,6 +26,10 @@ export default function Header() {
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link"><Link href={'/faq'}>FAQs</Link></a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link"><Link href={'/tracks'}>Tracks</Link></a>
                         </li>
 
                         <li class="nav-item dropdown">

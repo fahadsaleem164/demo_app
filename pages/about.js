@@ -1,11 +1,7 @@
 import Header from '../components/header'
 
 export default function About({data}) {
-
-console.log(data.image[0].url.slice(1))
-console.log(process.env.STRAPI_URL)
-
-
+        console.log(data)
     return (
 
             <>
