@@ -3,11 +3,13 @@ import {Card, Button} from 'react-bootstrap'
 import CardGroup from 'react-bootstrap/CardGroup'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Pagination from 'react-bootstrap/Pagination'
 
-
-export default function Tracks({data}) {
+export default function Tracks({data , page , totalposts}) {
+    console.log(totalposts)
     const router = useRouter()
 
+    const lastPage = Math.ceil(Number(totalposts)/ 3)   
     return (
 
             <>
@@ -33,20 +35,32 @@ export default function Tracks({data}) {
                     
 
              ))}
+
+
             </CardGroup>
+
+            <Pagination>
+                    {/* <Pagination.First /> */}
+                    <Pagination.Prev disabled={page<=1} onClick={()=>router.push(`tracks/?page=${ page - 1 }`)}></Pagination.Prev>
+                    <Pagination.Item>{page}/{lastPage}</Pagination.Item>
+                    <Pagination.Next disabled={page>=lastPage} onClick={()=>router.push(`tracks/?page=${ page + 1 }`)}></Pagination.Next>
+                    {/* <Pagination.Last /> */}
+                    </Pagination>
  
             </>
 
 )
   }
 
-  export async function getServerSideProps(context) {
+  export async function getServerSideProps({query : {page = 1}}) {
 
-    const pageNumber = context.query.slug
+   const start = +page === 1 ? 0 : (+page -1 ) *2
 
-    console.log(pageNumber)
-      
-    const res = await fetch(process.env.STRAPI_URL + '/tracks')
+    const numberofPosts = await fetch(process.env.STRAPI_URL + '/tracks/count')
+    const totalposts = await numberofPosts.json()
+
+    const res = await fetch(process.env.STRAPI_URL + '/tracks?_limit=2&_start='+ start)
+
     const data = await res.json()
   
     if (!data) {
@@ -57,7 +71,9 @@ export default function Tracks({data}) {
   
     return {
       props: {
-          data
+          data : data,
+          page : +page , 
+          totalposts
     }, // will be passed to the page component as props
     }
   }
