@@ -33,7 +33,7 @@ export default function Header() {
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a  class="nav-link"><Link href={'/'}>Contact US</Link></a>
+                            <a  class="nav-link"><Link href={'/contact'}>Contact US</Link></a>
                         </li>
 
                       

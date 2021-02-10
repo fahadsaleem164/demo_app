@@ -16,12 +16,13 @@ export default function Tracks({data , page , totalposts}) {
         <Header/>
           
       
-        <CardGroup style={{marginTop:"50px"}}>
+        <CardGroup style={{marginTop:"20px"}}>
             {data.map((tag,index) => ( 
   
-  
+                    <>
+                    
                     <Card>
-                        <Card.Img variant="top" src={tag.image[0].url} />
+                        <Card.Img style={{height:'30%', width:'100%'}} variant="top" src={tag.image[0].url} />
                         <Card.Body>
                         <Card.Title>{tag.title}</Card.Title>
                         <Card.Text>
@@ -33,19 +34,19 @@ export default function Tracks({data , page , totalposts}) {
                         </Card.Body>
                     </Card>
                     
-
+                </>
              ))}
 
 
             </CardGroup>
 
-            <Pagination>
+             <Pagination>
                     {/* <Pagination.First /> */}
                     <Pagination.Prev disabled={page<=1} onClick={()=>router.push(`tracks/?page=${ page - 1 }`)}></Pagination.Prev>
                     <Pagination.Item>{page}/{lastPage}</Pagination.Item>
                     <Pagination.Next disabled={page>=lastPage} onClick={()=>router.push(`tracks/?page=${ page + 1 }`)}></Pagination.Next>
                     {/* <Pagination.Last /> */}
-                    </Pagination>
+                    </Pagination> 
  
             </>
 
