@@ -1,6 +1,35 @@
 import Header from '../components/header'
+import axios from "axios"
+import * as qs from "query-string"
+import React, { useState } from 'react';
+
+
+
 export default function Faq({data}) {
- 
+    
+    // const [posts] = useState(data);
+    const [faq, setFaq] = useState(data);
+    
+
+        //  console.log(faqs)
+   function search(event){
+
+       
+
+       axios.get(`https://strapi-postgres-demo-abc.herokuapp.com/faqs?_where[title_contains]=${event.target.value}`).then(function (response) {
+         // handle success
+           
+                console.log(response.data)
+                setFaq(response.data)
+                 console.log(faq)
+
+                //  setCount(data)
+  })
+   
+    }
+
+    
+
     return (
 
             <>
@@ -33,9 +62,12 @@ export default function Faq({data}) {
 
         <section class="section-2 offers" style={{background:"#eef4ed"}}>
             <div class="container">
+            <div class="col-12 mt-0 input-group align-self-center item">
+                                <input type="text" name="name" onChange={()=> search(event)} class="form-control field-name" placeholder="Search" />
+                            </div>
                 <div class="row text-center intro">
 
-                {data.map((tag,index) => ( 
+                {faq.map((tag,index) => ( 
                   <>
                     <div class="col-12" style={{textAlign: "left"}}>
                          <h2>{tag.title}</h2>
