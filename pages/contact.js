@@ -26,7 +26,6 @@ class ContactFormPage extends React.Component {
 
       
         event.preventDefault()
-     
         const formData = {}
         var fd = new FormData();
         fd.append('form-name','Contact Form')
@@ -34,14 +33,17 @@ class ContactFormPage extends React.Component {
         fd.append( 'last_name', this.state.last_name);
         fd.append( 'email', this.state.email);
         fd.append( 'message', this.state.message);
+
+
+        
       
 
         
         for (var key of fd.entries()) {
-            console.log(key[0] + ', ' + key[1]);
+       
             formData[key[0]] = key[1]
         }
-        console.log(formData)
+       
        
         // Object.keys(this.domRef.current.value).map(key => (formData[key] = this.domRef.current.value))
       
@@ -59,6 +61,10 @@ class ContactFormPage extends React.Component {
         // but set the feedback message to show the error state.
         axios(axiosOptions)
           .then(response => {
+            console.log(this.state.email)
+            const res =  fetch('api/send_email?email='+this.state.email)
+
+
             this.setState({
               feedbackMsg: "Form submitted successfully!",
               name: '',

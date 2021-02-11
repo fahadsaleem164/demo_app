@@ -15,7 +15,6 @@ export default function Tracks({data , page , totalposts}) {
             <>
         <Header/>
           
-      
         <CardGroup style={{marginTop:"20px"}}>
             {data.map((tag,index) => ( 
   
@@ -46,7 +45,7 @@ export default function Tracks({data , page , totalposts}) {
                     <Pagination.Item>{page}/{lastPage}</Pagination.Item>
                     <Pagination.Next disabled={page>=lastPage} onClick={()=>router.push(`tracks/?page=${ page + 1 }`)}></Pagination.Next>
                     {/* <Pagination.Last /> */}
-                    </Pagination> 
+              </Pagination> 
  
             </>
 
@@ -56,7 +55,6 @@ export default function Tracks({data , page , totalposts}) {
   export async function getServerSideProps({query : {page = 1}}) {
 
    const start = +page === 1 ? 0 : (+page -1 ) *2
-
     const numberofPosts = await fetch(process.env.STRAPI_URL + '/tracks/count')
     const totalposts = await numberofPosts.json()
 
